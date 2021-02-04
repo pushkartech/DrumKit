@@ -4,8 +4,10 @@
 document.querySelectorAll(".drum").forEach(function (btn) {
     btn.addEventListener("click", function () {
         var buttonInnerHTML = this.innerHTML;
+
         makesound(buttonInnerHTML);
-        
+        buttonAnimation(buttonInnerHTML);
+
     })
 });
 
@@ -15,6 +17,7 @@ document.querySelectorAll(".drum").forEach(function (btn) {
 document.addEventListener("keydown", function(event) {
 
     makesound(event.key);
+    buttonAnimation(event.key);
 
     console.log(event);
     //using ascii values we can assign music to keys
@@ -67,4 +70,14 @@ function makesound (key) {
             
         default: console.log(buttonInnerHTML)
     }
+}
+
+function buttonAnimation (currentkey) {
+    var activeButton = document.querySelector("." + currentkey);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
